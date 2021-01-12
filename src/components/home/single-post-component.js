@@ -1,0 +1,107 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Hidden from "@material-ui/core/Hidden";
+
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+
+const useStyles = makeStyles({
+  card: {
+    display: "flex",
+  },
+  cardDetails: {
+    flex: 1,
+  },
+  cardMedia: {
+    width: 160,
+  },
+});
+
+export default function SinglePost(props) {
+  const classes = useStyles();
+  const { post } = props;
+
+  return (
+    <Grid item xs={12} md={4}>
+      <Card>
+        <CardActionArea>
+        {/* <CardActionArea component="a" href="#"> */}
+          {/* <Card className={classes.card}>
+          <div className={classes.cardDetails}>
+            <CardContent>
+              <Typography component="h2" variant="h5">
+                {post.title}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                {post.date}
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                {post.description}
+              </Typography>
+              <Typography variant="subtitle1" color="primary">
+                Continue reading...
+              </Typography>
+            </CardContent>
+          </div>
+          <Hidden xsDown>
+            <CardMedia className={classes.cardMedia} image={post.image} title={post.imageTitle} />
+          </Hidden>
+        </Card> */}
+          <CardMedia
+            component="img"
+            alt={post.imageTitle}
+            height="140"
+            image={post.image}
+            title={post.imageTitle}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {post.title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {post.description}
+              <br />
+              <i>{post.date}</i>
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <IconButton
+            color="primary"
+            aria-label="Facebook"
+            component="span"
+            size="small"
+          >
+            <FacebookIcon />
+          </IconButton>
+          <IconButton
+            color="primary"
+            aria-label="WhatsApp"
+            component="span"
+            size="small"
+          >
+            <WhatsAppIcon />
+          </IconButton>
+
+          <Button size="small" color="primary">
+            Vazhdo leximin...
+          </Button>
+        </CardActions>
+      </Card>
+    </Grid>
+  );
+}
+
+SinglePost.propTypes = {
+  post: PropTypes.object,
+};

@@ -42,6 +42,10 @@ function App() {
               </Switch>
             </Box>
           </Container>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <LabelBottomNavigation />
         </div>
       </Router>
