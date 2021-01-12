@@ -1,5 +1,9 @@
-export function SaveValues(name, values) {
+export function SaveValue(name, values) {
   localStorage.setItem(name, values);
+}
+
+export function GetValue(name) {
+  return JSON.parse(localStorage.getItem(name));
 }
 
 // export function GetValues() {

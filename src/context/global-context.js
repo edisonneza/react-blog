@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default React.createContext({
   title: "tech news",
@@ -10,5 +10,5 @@ export default React.createContext({
     country: "Albania",
     city: "Durres",
   },
-  changeUser: (user) => {}, 
+  changeUser: (user) => {},
 });

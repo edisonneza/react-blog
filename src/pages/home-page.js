@@ -10,6 +10,7 @@ export default function HomePage() {
 
   return (
     <div className={classes.root}>
+      
       <h4>Faqja kryesore</h4>
     </div>
   );

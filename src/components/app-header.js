@@ -8,12 +8,14 @@ import GlobalContext from '../context/global-context';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    // backgroundColor: theme.palette.background.paper
   },
   toolbar: {
     minHeight: '44px'
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    textAlign: 'center'
   },
 }));
 
@@ -23,7 +25,7 @@ export default function AppHeader() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" >
+      <AppBar position="static" color="default">
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" className={classes.title}>
             {/* Lajmet e përmbledhura teknologjike */}
