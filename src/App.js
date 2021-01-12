@@ -8,6 +8,7 @@ import LabelBottomNavigation from "./components/bottom-navigation";
 import AppHeader from "./components/app-header";
 import SearchPage from "./pages/search-page";
 import SavedPage from "./pages/saved-page";
+import PostPage from "./pages/post-page";
 import FavoritesPage from "./pages/favorites-page";
 import GlobalState from "./context/GlobalState";
 import { Container, Box } from "@material-ui/core";
@@ -38,6 +39,9 @@ function App() {
                 </Route>
                 <Route path="/settings">
                   <SettingsPage />
+                </Route>
+                <Route path="/post">
+                  <PostPage />
                 </Route>
               </Switch>
             </Box>

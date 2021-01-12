@@ -53,7 +53,7 @@ export default function FeaturedPost(props) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description.split(' ').splice(0, 10).join(' ')}...
             </Typography>
-            <Link variant="subtitle1" href="#">
+            <Link variant="subtitle1" href={post.link}>
               {post.linkText}
             </Link>
           </div>
