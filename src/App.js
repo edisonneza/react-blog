@@ -15,7 +15,7 @@ import { Container, Box } from "@material-ui/core";
 function App() {
   return (
     <GlobalState>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <div className="App">
           <AppHeader />
 
