@@ -11,10 +11,12 @@ import SavedPage from "./pages/saved-page";
 import FavoritesPage from "./pages/favorites-page";
 import GlobalState from "./context/GlobalState";
 import { Container, Box } from "@material-ui/core";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
   return (
     <GlobalState>
+      <CssBaseline />
       <Router basename={process.env.PUBLIC_URL}>
         <div className="App">
           <AppHeader />
