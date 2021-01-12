@@ -3,5 +3,6 @@ import React from "react";
 import SettingsForm from "../components/settings/preferences-component";
 
 export default function SettingsPage() {
+  
   return <SettingsForm />;
 }

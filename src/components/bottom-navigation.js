@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -10,11 +10,12 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import { useHistory } from "react-router-dom";
 import GlobalContext from "../context/global-context";
 import Constants from "../constants/constants";
+import { SettingsOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    position: 'fixed',
+    position: "fixed",
     left: "0px",
     right: "0px",
     bottom: 0,
@@ -23,13 +24,12 @@ const useStyles = makeStyles({
 
 export default function LabelBottomNavigation() {
   const classes = useStyles();
-  const [value, setValue] = React.useState("recents");
   let history = useHistory();
+  const [value, setValue] = React.useState(history.location.pathname);
   const { title, handleTitle } = useContext(GlobalContext);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    switch (newValue) {
+  const setTitle = (value) => {
+    switch (value) {
       case "/":
         handleTitle(Constants.appName);
         break;
@@ -49,6 +49,16 @@ export default function LabelBottomNavigation() {
         handleTitle(Constants.appName);
         break;
     }
+  };
+
+  useEffect(() => {
+    setTitle(value);
+
+  }, [value]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    setTitle(newValue);
     history.push(newValue);
   };
 
@@ -57,7 +67,6 @@ export default function LabelBottomNavigation() {
       value={value}
       onChange={handleChange}
       className={classes.root}
-      
     >
       <BottomNavigationAction label="Kryefaqja" value="/" icon={<HomeIcon />} />
       <BottomNavigationAction
