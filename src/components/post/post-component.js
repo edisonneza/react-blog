@@ -40,16 +40,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FeaturedPost(props) {
   const classes = useStyles();
-    // const { post } = props;
+    const { post } = props;
 //   console.log(props);
 
-  const post = {
-    title: props.post.title.rendered,
-    date: props.post.date,
-    description: props.post.content.rendered,
-    image: "https://source.unsplash.com/random",
-    imageText: "Image Text",
-  };
   console.log(post)
 
   return (

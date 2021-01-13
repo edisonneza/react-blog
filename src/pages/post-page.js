@@ -3,8 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Post from "../components/post/post-component";
 import SiteService from "../services/siteService";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-const service = new SiteService();
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -14,12 +13,12 @@ const useStyles = makeStyles({
 
 export default function PostPage() {
   const classes = useStyles();
-  const [post, setPost] = useState(null);
+  const location = useLocation();
+
+  const [post, setPost] = useState(location.state.post);
 
   useEffect(() => {
-    service
-      .getPostByHref("https://shop.shpresa.al/wp-json/wp/v2/posts/43825")
-      .then((data) => setPost(data));
+    
   }, []);
 
   return (

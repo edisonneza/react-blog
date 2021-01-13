@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   card: {
@@ -29,13 +30,14 @@ const useStyles = makeStyles({
 
 export default function SinglePost(props) {
   const classes = useStyles();
+  const history = useHistory();
   const { post } = props;
 
   return (
     <Grid item xs={12} md={4}>
       <Card>
         <CardActionArea>
-        {/* <CardActionArea component="a" href="#"> */}
+          {/* <CardActionArea component="a" href="#"> */}
           {/* <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
@@ -68,11 +70,16 @@ export default function SinglePost(props) {
             <Typography gutterBottom variant="h5" component="h2">
               {post.title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {post.description}
-              <br />
-              <i>{post.date}</i>
-            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              dangerouslySetInnerHTML={{
+                __html:
+                  post.description.split(" ").splice(0, 20).join(" ") + "...",
+              }}
+            ></Typography>
+            <i>{post.date}</i>
           </CardContent>
         </CardActionArea>
         <CardActions>
@@ -93,7 +100,11 @@ export default function SinglePost(props) {
             <WhatsAppIcon />
           </IconButton>
 
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => history.push({ pathname: post.link, state: { post } })}
+          >
             Vazhdo leximin...
           </Button>
         </CardActions>

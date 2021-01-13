@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -37,7 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FeaturedPost(props) {
   const classes = useStyles();
+  const history = useHistory();
   const { post } = props;
+  const location = {
+    pathname: post.link,
+    state: { post }
+  }
 
   return (
     <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})` }}>
@@ -50,12 +56,13 @@ export default function FeaturedPost(props) {
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
               {post.title}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-              {post.description.split(' ').splice(0, 10).join(' ')}...
+            <Typography variant="h5" color="inherit" paragraph dangerouslySetInnerHTML={{ __html: post.description.split(' ').splice(0, 15).join(' ') + '...'}}>
+
+              {/* {post.description.split(' ').splice(0, 10).join(' ')}... */}
             </Typography>
-            <Link variant="subtitle1" href={post.link}>
-              {post.linkText}
-            </Link>
+            <Button size="small" color="primary" onClick={() => history.push(location)}>
+              Vazhdo leximin...
+            </Button>
           </div>
         </Grid>
       </Grid>
