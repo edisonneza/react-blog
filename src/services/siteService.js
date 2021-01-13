@@ -5,17 +5,20 @@ export default class SiteService {
   }
 
   getPosts() {
-    return fetch(this.baseUrl + "/posts")
+    return fetch(this.baseUrl + "/posts?_embed=wp:featuredmedia&per_page=10&search=oneplus")
       .then((resp) => resp.json())
       .then((data) => {
         const post = data.map((data) => {
+          // console.log(data)
           return {
             title: data.title.rendered,
             date: data.date,
+            shortDesc: data.excerpt.rendered,
             description: data.content.rendered,
-            image: "https://source.unsplash.com/random",
+            image: data._embedded['wp:featuredmedia']['0'].source_url,// "https://source.unsplash.com/random",
             imageText: "Image Text",
             link: "/post",
+            originalLink: data.link
           };
         });
         return post;

@@ -42,7 +42,6 @@ export default function GlobalState({ children }) {
   let handleTitle = (value) => {
     setGlobalState({ ...globalState, title: value });
   };
-  console.log(globalState);
   let handleDarkTheme = (value) => {
     SaveValue('darkTheme', value);
     setGlobalState({ ...globalState, darkTheme: value });

@@ -5,8 +5,13 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import Divider from '@material-ui/core/Divider';
-import './post-component.css';
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import "./post-component.css";
+import { ToDateTime } from '../../utilities/functions';
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -36,14 +41,17 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 0,
     },
   },
+  buttonsDiv: {
+    margin: 5,
+  },
+  buttons: {
+    marginRight: 8,
+  },
 }));
 
 export default function FeaturedPost(props) {
   const classes = useStyles();
-    const { post } = props;
-//   console.log(props);
-
-  console.log(post)
+  const { post } = props;
 
   return (
     <main>
@@ -51,14 +59,6 @@ export default function FeaturedPost(props) {
         className={classes.mainFeaturedPost}
         style={{ backgroundImage: `url(${post.image})` }}
       >
-        {/* Increase the priority of the hero background image */}
-        {
-        //   <img
-        //     style={{ display: "none" }}
-        //     src={post.image}
-        //     alt={post.imageText}
-        //   />
-        }
         <div className={classes.overlay} />
         <Grid container>
           <Grid item md={6}>
@@ -79,13 +79,45 @@ export default function FeaturedPost(props) {
         </Grid>
       </Paper>
       <Divider />
-      <Grid item xs={12} md={8}>
-      <Typography variant="h5" gutterBottom style={{padding: 10}}>
-        {post.title}
-      </Typography>
-      <Divider />
-      <Typography variant="body1" className={"description"} dangerouslySetInnerHTML={{ __html: post.description}}>
-      </Typography>
+      <Grid item xs={12} md={9}>
+        <Typography variant="h5" gutterBottom style={{ padding: 10 }}>
+          {post.title}
+        </Typography>
+        <Divider />
+        <Typography variant="subtitle1" className={classes.buttonsDiv}>
+          <Button
+            variant="outlined"
+            size="small"
+            className={classes.buttons}
+            href={post.originalLink}
+            target="_blank"
+          >
+            Linku origjinal
+          </Button>
+          <IconButton
+            className={classes.buttons}
+            aria-label="Facebook"
+            component="span"
+            size="small"
+          >
+            <FacebookIcon />
+          </IconButton>
+          <IconButton
+            className={classes.buttons}
+            aria-label="WhatsApp"
+            component="span"
+            size="small"
+          >
+            <WhatsAppIcon />
+          </IconButton>
+            <i>{ToDateTime(post.date)}</i>
+        </Typography>
+        <Divider />
+        <Typography
+          variant="body1"
+          className={"description"}
+          dangerouslySetInnerHTML={{ __html: post.description }}
+        ></Typography>
       </Grid>
     </main>
   );

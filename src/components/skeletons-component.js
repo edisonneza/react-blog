@@ -38,6 +38,16 @@ export default function Skeletons() {
               height={10}
               style={{ marginBottom: 6 }}
             />
+            <Skeleton
+              animation="wave"
+              height={10}
+              style={{ marginBottom: 6 }}
+            />
+            <Skeleton
+              animation="wave"
+              height={10}
+              style={{ marginBottom: 6 }}
+            />
           </Grid>
         ))}
       </Grid>

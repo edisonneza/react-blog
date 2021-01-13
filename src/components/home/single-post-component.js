@@ -36,7 +36,7 @@ export default function SinglePost(props) {
   const { post } = props;
 
   return (
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} sm={6} md={4}>
       <Card>
         <CardActionArea>
           {/* <CardActionArea component="a" href="#"> */}
@@ -78,7 +78,7 @@ export default function SinglePost(props) {
               component="p"
               dangerouslySetInnerHTML={{
                 __html:
-                  post.description.split(" ").splice(0, 20).join(" ") + "...",
+                  post.shortDesc.split(" ").splice(0, 20).join(" ") + "...",
               }}
             ></Typography>
             <i>{moment(post.date).locale('sq').fromNow()}</i>
