@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -14,6 +14,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { useHistory } from "react-router-dom";
 import { DateFromNow } from '../../utilities/functions';
+import GlobalContext from '../../context/global-context';
 
 const useStyles = makeStyles({
   card: {
@@ -31,6 +32,8 @@ export default function SinglePost(props) {
   const classes = useStyles();
   const history = useHistory();
   const { post } = props;
+  const { handlePost } = useContext(GlobalContext);
+
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -102,7 +105,8 @@ export default function SinglePost(props) {
           <Button
             size="small"
             color="primary"
-            onClick={() => history.push({ pathname: post.link, state: { post } })}
+            // onClick={() => history.push({ pathname: post.link, state: { post } })}
+            onClick={() => handlePost(post)}
           >
             Vazhdo leximin...
           </Button>

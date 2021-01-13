@@ -9,6 +9,7 @@ import {
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { SaveValue, GetValue } from "../services/storageService";
 // import Constants from '../constants/constants';
+import FullScreenPostDialog from '../components/post/dialog-fullscreen-component';
 
 export default function GlobalState({ children }) {
   if(GetValue('darkTheme') === undefined){
@@ -26,7 +27,8 @@ export default function GlobalState({ children }) {
       country: "Albania",
       city: "Durres",
     },
-    darkTheme
+    darkTheme,
+    post: null
   });
 
   const palletType = globalState.darkTheme ? "dark" : "light";
@@ -45,6 +47,11 @@ export default function GlobalState({ children }) {
   let handleDarkTheme = (value) => {
     SaveValue('darkTheme', value);
     setGlobalState({ ...globalState, darkTheme: value });
+  }
+
+  let handlePost = (post) => {
+    setGlobalState({ ...globalState, post });
+
   }
 
   const Theme = {
@@ -69,9 +76,14 @@ export default function GlobalState({ children }) {
         handleTitle,
         darkTheme: globalState.darkTheme,
         handleDarkTheme,
+        handlePost
       }}
     >
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        {<FullScreenPostDialog post={globalState.post} handlePost={handlePost} />}
+
+        {children}
+        </ThemeProvider>
     </GlobalContext.Provider>
   );
 }

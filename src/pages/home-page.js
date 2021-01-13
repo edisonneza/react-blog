@@ -26,11 +26,11 @@ export default function HomePage() {
     service.getHashTags().then((data) => setTags(data));
     service.getPosts().then(data => setFeaturedPosts(data));
     service
-      .getPostByHref("https://shop.shpresa.al/wp-json/wp/v2/posts/43825")
+      .getPostByHref("https://shop.shpresa.al/wp-json/wp/v2/posts/43825?_embed=wp:featuredmedia")
       .then((data) => setMainFeaturedPost(data));
 
   }, []);
-  console.log(categories);
+  // console.log(categories);
 
   const sections = [
     { title: "Technology", url: "#" },

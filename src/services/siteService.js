@@ -50,7 +50,7 @@ export default class SiteService {
           title: data.title.rendered,
           date: data.date,
           description: data.content.rendered,
-          image: "https://source.unsplash.com/random",
+            image: data._embedded['wp:featuredmedia']['0'].source_url,// "https://source.unsplash.com/random",
           imageText: "Image Text",
           link: "/post",
         };
