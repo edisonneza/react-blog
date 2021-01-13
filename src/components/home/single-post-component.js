@@ -7,16 +7,13 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Hidden from "@material-ui/core/Hidden";
-
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { useHistory } from "react-router-dom";
-import moment from 'moment';
-import 'moment/locale/sq';
+import { DateFromNow } from '../../utilities/functions';
 
 const useStyles = makeStyles({
   card: {
@@ -81,7 +78,7 @@ export default function SinglePost(props) {
                   post.shortDesc.split(" ").splice(0, 20).join(" ") + "...",
               }}
             ></Typography>
-            <i>{moment(post.date).locale('sq').fromNow()}</i>
+            <i>{DateFromNow(post.date)}</i>
           </CardContent>
         </CardActionArea>
         <CardActions>

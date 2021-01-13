@@ -6,3 +6,7 @@ export function ToDateTime(value){
     return moment(value).locale('sq').format('DD/MM/YYYY hh:mm:ss');
 }
 
+export function DateFromNow(value){
+    return moment(value).locale('sq').fromNow();
+}
+
