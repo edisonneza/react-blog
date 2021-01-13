@@ -6,6 +6,7 @@ import Posts from "../components/home/posts-component";
 import SiteService from "../services/siteService";
 import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
 import { CircularProgress } from "@material-ui/core";
+import Skeletons from "../components/skeletons-component";
 
 const useStyles = makeStyles({
   root: {},
@@ -56,8 +57,9 @@ export default function HomePage() {
         <FeaturedPost post={mainFeaturedPost} /> 
         <Posts posts={featuredPosts} />
         </>
-        : <center><CircularProgress color="primary"/> </center>}
-
+        : 
+          <Skeletons />
+        }
         {/* <FullScreenPostDialog /> */}
         
       </main>
