@@ -79,8 +79,14 @@ export default function FeaturedPost(props) {
         </Grid>
       </Paper>
       <Divider />
-      <div className={"description"} dangerouslySetInnerHTML={{ __html: post.description}}>
-      </div>
+      <Grid item xs={12} md={8}>
+      <Typography variant="h5" gutterBottom style={{padding: 10}}>
+        {post.title}
+      </Typography>
+      <Divider />
+      <Typography variant="body1" className={"description"} dangerouslySetInnerHTML={{ __html: post.description}}>
+      </Typography>
+      </Grid>
     </main>
   );
 }

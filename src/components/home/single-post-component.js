@@ -15,6 +15,8 @@ import IconButton from "@material-ui/core/IconButton";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { useHistory } from "react-router-dom";
+import moment from 'moment';
+import 'moment/locale/sq';
 
 const useStyles = makeStyles({
   card: {
@@ -79,7 +81,7 @@ export default function SinglePost(props) {
                   post.description.split(" ").splice(0, 20).join(" ") + "...",
               }}
             ></Typography>
-            <i>{post.date}</i>
+            <i>{moment(post.date).locale('sq').fromNow()}</i>
           </CardContent>
         </CardActionArea>
         <CardActions>
