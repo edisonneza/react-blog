@@ -1,28 +1,34 @@
-import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-import FeaturedPost from './post-component';
-import { Container } from '@material-ui/core';
-
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import CloseIcon from "@material-ui/icons/Close";
+import Slide from "@material-ui/core/Slide";
+import FeaturedPost from "./post-component";
+import { Container } from "@material-ui/core";
+import Fab from '@material-ui/core/Fab';
+// import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    position: 'relative',
+    position: "relative",
   },
   title: {
     marginLeft: theme.spacing(2),
     flex: 1,
+  },
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
 }));
 
@@ -37,31 +43,44 @@ export default function FullScreenPostDialog(props) {
     props.handlePost(null);
   };
 
-  let open = !!props.post
+  let open = !!props.post;
 
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Open full-screen dialog
       </Button> */}
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        {/* <AppBar className={classes.appBar}>
           <Toolbar className={classes.title}>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
               <CloseIcon />
             </IconButton>
-            {/* <Typography variant="h6" className={classes.title}>
+            <Typography variant="h6" className={classes.title}>
               Sound
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               save
-            </Button> */}
+            </Button>
           </Toolbar>
-        </AppBar>
-        <br/><br/>
+        </AppBar> */}
+        <br />
+        <br />
         <Container>
           {props.post && <FeaturedPost post={props.post} />}
-         
+          <Fab aria-label={"test"} className={classes.fab} color="primary" onClick={handleClose} size="small">
+            <CloseIcon />
+          </Fab>
         </Container>
       </Dialog>
     </div>

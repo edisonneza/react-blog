@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SectionsHeader from "../components/home/sections-component";
 import FeaturedPost from "../components/featured-post-component";
@@ -7,6 +7,7 @@ import SiteService from "../services/siteService";
 import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
 import { CircularProgress } from "@material-ui/core";
 import Skeletons from "../components/skeletons-component";
+import GlobalContext from '../context/global-context';
 
 const useStyles = makeStyles({
   root: {},
@@ -16,18 +17,20 @@ const service = new SiteService();
 
 export default function HomePage() {
   const classes = useStyles();
-  const [categories, setCategories] = useState([]);
-  const [tags, setTags] = useState([]);
+  const { posts, handlePosts, categories, handleCategories, tags, handleTags } = useContext(GlobalContext);
+
   const [mainFeaturedPost, setMainFeaturedPost] = useState();
-  const [featuredPosts, setFeaturedPosts] = useState();
 
   useEffect(() => {
-    service.getCategories().then((data) => setCategories(data));
-    service.getHashTags().then((data) => setTags(data));
-    service.getPosts().then(data => setFeaturedPosts(data));
-    service
-      .getPostByHref("https://shop.shpresa.al/wp-json/wp/v2/posts/43825?_embed=wp:featuredmedia")
-      .then((data) => setMainFeaturedPost(data));
+    if(!categories)
+      service.getCategories().then((data) => handleCategories(data));
+    if(!tags)
+      service.getHashTags().then((data) => handleTags(data));
+    if(!posts)
+      service.getPosts().then(data => handlePosts(data));
+    // service
+    //   .getPostByHref("https://shop.shpresa.al/wp-json/wp/v2/posts/43825?_embed=wp:featuredmedia")
+    //   .then((data) => setMainFeaturedPost(data));
 
   }, []);
   // console.log(categories);
@@ -52,10 +55,10 @@ export default function HomePage() {
       {/* <h4>Faqja kryesore</h4> */}
       <SectionsHeader sections={sections} title="test" />
       <main>
-        {(mainFeaturedPost && featuredPosts) ?
+        {(posts) ?
         <>
-        <FeaturedPost post={mainFeaturedPost} /> 
-        <Posts posts={featuredPosts} />
+        <FeaturedPost post={posts[0]} /> 
+        <Posts posts={posts.filter((item, index) => index != 0)} /> {/* get all but not first item (because is used in FeaturedPost) */}
         </>
         : 
           <Skeletons />

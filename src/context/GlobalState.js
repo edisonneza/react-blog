@@ -20,14 +20,10 @@ export default function GlobalState({ children }) {
   const [globalState, setGlobalState] = useState({
     //this can be different from user-context.js (for example u can fetch new data etc)
     // title: Constants.appName,
-    user: {
-      name: "soni",
-      lastName: "neza",
-      age: 26,
-      country: "Albania",
-      city: "Durres",
-    },
     darkTheme,
+    posts: null,
+    categories: null,
+    tags: null,
     post: null
   });
 
@@ -37,22 +33,17 @@ export default function GlobalState({ children }) {
     ? deepOrange[900]
     : deepPurple[500];
 
-  const handleChangeUser = (user) => {
-    console.log("Changing user", user);
-  };
 
-  let handleTitle = (value) => {
-    setGlobalState({ ...globalState, title: value });
-  };
+  let handleTitle = (value) => setGlobalState({ ...globalState, title: value });
   let handleDarkTheme = (value) => {
     SaveValue('darkTheme', value);
     setGlobalState({ ...globalState, darkTheme: value });
   }
 
-  let handlePost = (post) => {
-    setGlobalState({ ...globalState, post });
-
-  }
+  let handlePost = (post) => setGlobalState({ ...globalState, post });
+  let handlePosts = (posts) => setGlobalState({ ...globalState, posts});
+  let handleCategories = (categories) => setGlobalState({ ...globalState, categories});
+  let handleTags = (tags) => setGlobalState({ ...globalState, tags});
 
   const Theme = {
     palette: {
@@ -71,12 +62,16 @@ export default function GlobalState({ children }) {
     <GlobalContext.Provider
       value={{
         title: globalState.title,
-        user: globalState.user,
-        changeUser: globalState.handleChangeUser,
         handleTitle,
         darkTheme: globalState.darkTheme,
         handleDarkTheme,
-        handlePost
+        posts: globalState.posts,
+        handlePosts,
+        handlePost,
+        categories: globalState.categories,
+        handleCategories,
+        tags: globalState.tags,
+        handleTags
       }}
     >
       <ThemeProvider theme={theme}>
