@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { useHistory } from "react-router-dom";
-import { DateFromNow } from '../../utilities/functions';
+import { DateFromNow } from '../../utils/functions';
 import GlobalContext from '../../context/global-context';
 
 const useStyles = makeStyles({

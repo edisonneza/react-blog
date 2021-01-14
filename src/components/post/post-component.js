@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import "./post-component.css";
-import { ToDateTime } from '../../utilities/functions';
+import { ToDateTime } from '../../utils/functions';
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
