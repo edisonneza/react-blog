@@ -4,8 +4,8 @@ export default class SiteService {
     if (!baseUrl) this.baseUrl = "https://shop.shpresa.al/wp-json/wp/v2";
   }
 
-  getPosts() {
-    return fetch(this.baseUrl + "/posts?_embed=wp:featuredmedia&per_page=10&search=oneplus")
+  getPosts(searchQuery) {
+    return fetch(`${this.baseUrl}/posts?_embed=wp:featuredmedia&per_page=10&search=${searchQuery}`)
       .then((resp) => resp.json())
       .then((data) => {
         const post = data.map((data) => {
