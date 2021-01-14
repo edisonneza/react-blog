@@ -9,13 +9,13 @@ import {
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { SaveValue, GetValue } from "../services/storageService";
 // import Constants from '../constants/constants';
-import FullScreenPostDialog from '../components/post/dialog-fullscreen-component';
+import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
 
 export default function GlobalState({ children }) {
-  if(GetValue('darkTheme') === undefined){
-      SaveValue('darkTheme', false);
+  if (GetValue("darkTheme") === undefined) {
+    SaveValue("darkTheme", false);
   }
-  const darkTheme = GetValue('darkTheme');
+  const darkTheme = GetValue("darkTheme");
 
   const [globalState, setGlobalState] = useState({
     //this can be different from user-context.js (for example u can fetch new data etc)
@@ -24,7 +24,8 @@ export default function GlobalState({ children }) {
     posts: null,
     categories: null,
     tags: null,
-    post: null
+    post: null,
+    tabSelected: { index: 0, value: "" },
   });
 
   const palletType = globalState.darkTheme ? "dark" : "light";
@@ -33,17 +34,19 @@ export default function GlobalState({ children }) {
     ? deepOrange[900]
     : deepPurple[500];
 
-
   let handleTitle = (value) => setGlobalState({ ...globalState, title: value });
   let handleDarkTheme = (value) => {
-    SaveValue('darkTheme', value);
+    SaveValue("darkTheme", value);
     setGlobalState({ ...globalState, darkTheme: value });
-  }
+  };
 
   let handlePost = (post) => setGlobalState({ ...globalState, post });
-  let handlePosts = (posts) => setGlobalState({ ...globalState, posts});
-  let handleCategories = (categories) => setGlobalState({ ...globalState, categories});
-  let handleTags = (tags) => setGlobalState({ ...globalState, tags});
+  let handlePosts = (posts) => setGlobalState({ ...globalState, posts });
+  let handleCategories = (categories) =>
+    setGlobalState({ ...globalState, categories });
+  let handleTags = (tags) => setGlobalState({ ...globalState, tags });
+  let handleTabSelected = (tabSelected) => setGlobalState({ ...globalState, tabSelected });
+  console.log(globalState);
 
   const Theme = {
     palette: {
@@ -71,14 +74,21 @@ export default function GlobalState({ children }) {
         categories: globalState.categories,
         handleCategories,
         tags: globalState.tags,
-        handleTags
+        handleTags,
+        tabSelected: globalState.tabSelected,
+        handleTabSelected,
       }}
     >
       <ThemeProvider theme={theme}>
-        {<FullScreenPostDialog post={globalState.post} handlePost={handlePost} />}
+        {
+          <FullScreenPostDialog
+            post={globalState.post}
+            handlePost={handlePost}
+          />
+        }
 
         {children}
-        </ThemeProvider>
+      </ThemeProvider>
     </GlobalContext.Provider>
   );
 }

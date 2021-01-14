@@ -36,16 +36,17 @@ export default function HomePage() {
   // console.log(categories);
 
   const sections = [
-    { title: "Technology", url: "#" },
+    { title: "Të gjitha", url: "#" },
+    { title: "Teknologji", url: "#" },
+    { title: "Apple", url: "#" },
+    { title: "Microsoft", url: "#" },
+    { title: "Android", url: "#" },
+    { title: "Samsung", url: "#" },
+    { title: "Shkence", url: "#" },
+    { title: "Programim", url: "#" },
     { title: "Design", url: "#" },
-    { title: "Culture", url: "#" },
-    { title: "Business", url: "#" },
-    { title: "Politics", url: "#" },
-    { title: "Opinion", url: "#" },
-    { title: "Science", url: "#" },
-    { title: "Health", url: "#" },
-    { title: "Style", url: "#" },
-    { title: "Travel", url: "#" },
+    { title: "Nasa", url: "#" },
+    { title: "Covid", url: "#" },
   ];
 
 
