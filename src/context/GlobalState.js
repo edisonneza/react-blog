@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core/colors";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { SaveValue, GetValue } from "../services/storageService";
-// import Constants from '../constants/constants';
+import Constants from '../constants/constants';
 import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
 
 export default function GlobalState({ children }) {
@@ -19,7 +19,7 @@ export default function GlobalState({ children }) {
 
   const [globalState, setGlobalState] = useState({
     //this can be different from user-context.js (for example u can fetch new data etc)
-    // title: Constants.appName,
+    title: Constants.appName,
     darkTheme,
     posts: null,
     categories: null,
