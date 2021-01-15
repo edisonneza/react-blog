@@ -26,29 +26,30 @@ export default function SearchPage() {
   const [searchVal, setSearchVal] = useState(searchPosts.searchValue);
 
   useEffect(() => {
-    const delaySearch = setTimeout(() => { //wait 1 sec until user stop typing
-      debugger;
+    const delaySearch = setTimeout(() => {
+      //wait 1 sec until user stop typing
       if (searchVal.length > 2) {
         setIsLoading(true);
         service
           .getPosts(searchVal, 15)
           .then((data) => {
-            handleSearchPosts({searchValue: searchVal, posts: data });
+            handleSearchPosts({ searchValue: searchVal, posts: data });
             setIsLoading(false);
           })
           .catch((error) => {
             setErrors(error.errorMessage);
           });
+      } else {
+        handleSearchPosts({ searchValue: "", posts: [] });
       }
-
-    }, 1000)
+    }, 1000);
 
     return () => clearTimeout(delaySearch);
   }, [searchVal]);
 
   const handleChange = (ev) => {
     setSearchVal(ev.target.value);
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -72,15 +73,15 @@ export default function SearchPage() {
           />
         </Grid>
       </Grid>
-        <Divider />
-<br/>
+      <Divider />
+      <br />
       <Grid container>
         {!isLoading && searchPosts.posts ? (
           <>
             <Posts posts={searchPosts.posts} />
           </>
         ) : (
-          <Skeletons />
+          isLoading && <Skeletons />
         )}
       </Grid>
     </div>
