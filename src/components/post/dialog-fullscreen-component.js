@@ -13,8 +13,9 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import FeaturedPost from "./post-component";
-import { Container } from "@material-ui/core";
-import Fab from '@material-ui/core/Fab';
+import { Container, Fab } from "@material-ui/core";
+import SaveIcon from "@material-ui/icons/Save";
+import { SavePost } from "../../services/storageService";
 // import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  button: {
+    margin: theme.spacing(1),
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -42,6 +46,10 @@ export default function FullScreenPostDialog(props) {
   const handleClose = () => {
     props.handlePost(null);
   };
+
+  const handleSavePost = () => {
+    SavePost(props.post);
+  }
 
   let open = !!props.post;
 
@@ -78,7 +86,29 @@ export default function FullScreenPostDialog(props) {
         <br />
         <Container>
           {props.post && <FeaturedPost post={props.post} />}
-          <Fab aria-label={"test"} className={classes.fab} color="primary" onClick={handleClose} size="small">
+          <Divider />
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            startIcon={<SaveIcon />}
+            onClick={handleSavePost}
+          >
+            Ruaj postimin
+          </Button>
+
+
+
+          <Divider />
+          <br /> <br />
+          <Fab
+            aria-label={"test"}
+            className={classes.fab}
+            color="primary"
+            onClick={handleClose}
+            size="small"
+          >
             <CloseIcon />
           </Fab>
         </Container>

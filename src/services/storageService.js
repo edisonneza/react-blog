@@ -8,6 +8,18 @@ export function GetValue(name) {
   return JSON.parse(localStorage.getItem(Constants.localStoragePrefix + name));
 }
 
+export function SavePost(post){
+  let savedPost = GetValue('savedPost');
+  debugger;
+  if(savedPost){
+    const postExist = savedPost.filter(item => item.originalLink === post.originalLink).length > 0;
+    if(!postExist)
+      SaveValue('savedPost', [...savedPost, {...post}]);
+  }else{
+    SaveValue('savedPost', [{...post}])
+  }
+}
+
 // export function GetValues() {
 //   let items = [];
 //   for (var key in localStorage) {
