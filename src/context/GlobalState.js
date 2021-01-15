@@ -51,7 +51,7 @@ export default function GlobalState({ children }) {
     setGlobalState({ ...globalState, categories });
   let handleTags = (tags) => setGlobalState({ ...globalState, tags });
   let handleTabSelected = (tabSelected) => setGlobalState({ ...globalState, tabSelected });
-  console.log(globalState);
+  // console.log(globalState);
 
   const Theme = {
     palette: {
