@@ -2,11 +2,6 @@ import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import GlobalContext from "../../context/global-context";
@@ -45,7 +40,7 @@ export default function SectionsHeader(props) {
   const classes = useStyles();
   const { tabSelected, handleTabSelected } = useContext(GlobalContext);
 
-  const { sections, title } = props;
+  const { sections } = props;
   const [value, setValue] = useState({
     id: tabSelected.index,
     value: sections[tabSelected.index].title,

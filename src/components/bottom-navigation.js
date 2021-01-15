@@ -10,7 +10,6 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import { useHistory } from "react-router-dom";
 import GlobalContext from "../context/global-context";
 import Constants from "../constants/constants";
-import { SettingsOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
@@ -26,7 +25,7 @@ export default function LabelBottomNavigation() {
   const classes = useStyles();
   let history = useHistory();
   const [value, setValue] = React.useState(history.location.pathname);
-  const { title, handleTitle } = useContext(GlobalContext);
+  const { handleTitle } = useContext(GlobalContext);
 
   const setTitle = (value) => {
     switch (value) {

@@ -4,8 +4,7 @@ import SectionsHeader from "../components/home/sections-component";
 import FeaturedPost from "../components/featured-post-component";
 import Posts from "../components/home/posts-component";
 import SiteService from "../services/siteService";
-import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
-import { CircularProgress, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import Skeletons from "../components/skeletons-component";
 import GlobalContext from "../context/global-context";
 import { usePrevious } from "../customHooks/custom-hooks";
@@ -28,10 +27,10 @@ export default function HomePage() {
   const {
     posts,
     handlePosts,
-    categories,
-    handleCategories,
-    tags,
-    handleTags,
+    // categories,
+    // handleCategories,
+    // tags,
+    // handleTags,
     tabSelected,
   } = useContext(GlobalContext);
 
@@ -43,7 +42,7 @@ export default function HomePage() {
     // if (!categories)
     //   service.getCategories().then((data) => handleCategories(data));
     // if (!tags) service.getTags().then((data) => handleTags(data));
-    if (!posts || (tabSelectedPrev && tabSelectedPrev != tabSelected)) {
+    if (!posts || (tabSelectedPrev && tabSelectedPrev !== tabSelected)) {
       setIsLoading(true);
       let searchVal = tabSelected.index > 0 ? tabSelected.value : "";
       service
@@ -81,7 +80,7 @@ export default function HomePage() {
         {!isLoading && posts.length > 0 ? (
           <>
             <FeaturedPost post={posts[0]} />
-            <Posts posts={posts.filter((item, index) => index != 0)} />{" "}
+            <Posts posts={posts.filter((item, index) => index !== 0)} />{" "}
             {/* get all but not first item (because is used in FeaturedPost) */}
           </>
         ) : (

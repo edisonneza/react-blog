@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Grid, Divider } from "@material-ui/core";
+import { TextField, Grid, Divider, Snackbar, IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import Skeletons from "../components/skeletons-component";
 import Posts from "../components/home/posts-component";
 import SiteService from "../services/siteService";
 import GlobalContext from "../context/global-context";
-import SnackbarNoInternet from "../components/snackbar-no-internet-component";
 
 const useStyles = makeStyles({
   root: {},
@@ -84,6 +84,23 @@ export default function SearchPage() {
           isLoading && <Skeletons />
         )}
       </Grid>
+
+      <Snackbar
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              open={!!errors}
+              message={errors}
+              key={"topcenter"}
+              action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    className={classes.close}
+                    onClick={() => setErrors('')}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+              }
+            />
     </div>
   );
 }

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Post from "../components/post/post-component";
-import SiteService from "../services/siteService";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useLocation } from 'react-router-dom';
 
@@ -15,7 +14,7 @@ export default function PostPage() {
   const classes = useStyles();
   const location = useLocation();
 
-  const [post, setPost] = useState(location.state.post);
+  // const [post, setPost] = useState(location.state.post);
 
   useEffect(() => {
     
@@ -23,7 +22,7 @@ export default function PostPage() {
 
   return (
     <div className={classes.root}>
-      {post ? <Post post={post} /> : <center><CircularProgress /></center>}
+      {location.state.post ? <Post post={location.state.post} /> : <center><CircularProgress /></center>}
     </div>
   );
 }

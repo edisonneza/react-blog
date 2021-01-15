@@ -5,7 +5,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { Link, useHistory } from "react-router-dom";
 import GlobalContext from '../context/global-context';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,12 +40,7 @@ export default function FeaturedPost(props) {
   const { handlePost } = useContext(GlobalContext);
 
   const classes = useStyles();
-  const history = useHistory();
   const { post } = props;
-  const location = {
-    pathname: post.link,
-    state: { post },
-  };
 
   return (
     <Paper

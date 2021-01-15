@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -19,28 +18,23 @@ import {
   Button,
   Dialog,
   DialogActions,
-  DialogContent,
-  DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  card: {
-    display: "flex",
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
-  deleteBtn: {
-    flex: 2,
-  },
-});
+// const useStyles = makeStyles({
+//   card: {
+//     display: "flex",
+//   },
+//   cardDetails: {
+//     flex: 1,
+//   },
+//   cardMedia: {
+//     width: 160,
+//   },
+// });
 
 export default function SinglePost(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { post, showDelete, handleDelete } = props;
   const { handlePost } = useContext(GlobalContext);
   const [openDialog, setOpenDialog ] = useState(false);
@@ -48,7 +42,7 @@ export default function SinglePost(props) {
   const handleDeletePost = () => {
     const posts = GetValue('savedPost');
     if(posts){
-      const otherPosts = posts.filter(item => item.originalLink != post.originalLink);
+      const otherPosts = posts.filter(item => item.originalLink !== post.originalLink);
       SaveValue('savedPost', otherPosts);
       handleDelete(post); //to refresh the post list in parent component
     }

@@ -1,14 +1,8 @@
 import React, { useContext } from "react";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Switch from "@material-ui/core/Switch";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 import GlobalContext from "../../context/global-context";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,8 +21,7 @@ export default function SettingsForm() {
   const { darkTheme, handleDarkTheme } = useContext(GlobalContext);
 
   const handleChange = (event) => {
-    if (event.target.name == "darkTheme") handleDarkTheme(event.target.checked);
-
+    if (event.target.name === "darkTheme") handleDarkTheme(event.target.checked);
     // setState({ ...state, [event.target.name]: event.target.checked });
   };
 
