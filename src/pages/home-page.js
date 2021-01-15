@@ -5,7 +5,7 @@ import FeaturedPost from "../components/featured-post-component";
 import Posts from "../components/home/posts-component";
 import SiteService from "../services/siteService";
 import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
-import { CircularProgress, IconButton, useTheme } from "@material-ui/core";
+import { CircularProgress, IconButton } from "@material-ui/core";
 import Skeletons from "../components/skeletons-component";
 import GlobalContext from "../context/global-context";
 import { usePrevious } from "../customHooks/custom-hooks";
@@ -40,9 +40,9 @@ export default function HomePage() {
 
   const tabSelectedPrev = usePrevious(tabSelected);
   useEffect(() => {
-    if (!categories)
-      service.getCategories().then((data) => handleCategories(data));
-    if (!tags) service.getTags().then((data) => handleTags(data));
+    // if (!categories)
+    //   service.getCategories().then((data) => handleCategories(data));
+    // if (!tags) service.getTags().then((data) => handleTags(data));
     if (!posts || (tabSelectedPrev && tabSelectedPrev != tabSelected)) {
       setIsLoading(true);
       let searchVal = tabSelected.index > 0 ? tabSelected.value : "";
@@ -102,7 +102,7 @@ export default function HomePage() {
                   </IconButton>
               }
             />
-            <Skeletons />
+            <Skeletons showFeaturedSkeleton />
           </>
         )}
         {/* <FullScreenPostDialog /> */}

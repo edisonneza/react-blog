@@ -26,6 +26,10 @@ export default function GlobalState({ children }) {
     tags: null,
     post: null,
     tabSelected: { index: 0, value: "" },
+    searchPosts: {
+      searchValue: '',
+      posts: null
+    },
   });
 
   const palletType = globalState.darkTheme ? "dark" : "light";
@@ -42,6 +46,7 @@ export default function GlobalState({ children }) {
 
   let handlePost = (post) => setGlobalState({ ...globalState, post });
   let handlePosts = (posts) => setGlobalState({ ...globalState, posts });
+  let handleSearchPosts = (searchPosts) => setGlobalState({ ...globalState, searchPosts });
   let handleCategories = (categories) =>
     setGlobalState({ ...globalState, categories });
   let handleTags = (tags) => setGlobalState({ ...globalState, tags });
@@ -77,6 +82,8 @@ export default function GlobalState({ children }) {
         handleTags,
         tabSelected: globalState.tabSelected,
         handleTabSelected,
+        searchPosts: globalState.searchPosts,
+        handleSearchPosts
       }}
     >
       <ThemeProvider theme={theme}>

@@ -6,7 +6,7 @@ export default class SiteService {
     if (!baseUrl) this.baseUrl = "https://shop.shpresa.al/wp-json/wp/v2";
   }
 
-  getPosts(searchQuery) {
+  getPosts(searchQuery, perPage=10) {
     if (!navigator.onLine) {
       return new Promise((resolve, reject) => {
         if (GetValue("posts")) resolve(GetValue("posts"));
@@ -18,7 +18,7 @@ export default class SiteService {
       });
     } else {
       return fetch(
-        `${this.baseUrl}/posts?_embed=wp:featuredmedia&per_page=10&search=${searchQuery}`
+        `${this.baseUrl}/posts?_embed=wp:featuredmedia&per_page=${perPage}&search=${searchQuery}`
       )
         .then((resp) => resp.json())
         .then((data) => {
