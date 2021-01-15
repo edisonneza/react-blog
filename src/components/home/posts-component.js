@@ -5,12 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import SinglePost from './single-post-component';
 
 export default function Posts(props) {
-  const { posts } = props;
+  const { posts, showDelete } = props;
 
   return (
     <Grid container spacing={3}>
       {posts.map((post) => (
-        <SinglePost key={post.title} post={post} />
+        <SinglePost key={post.title} post={post} showDelete={showDelete} />
       ))}
     </Grid>
   );
@@ -18,4 +18,5 @@ export default function Posts(props) {
 
 Posts.propTypes = {
   posts: PropTypes.array,
+  showDelete: PropTypes.bool
 };

@@ -59,7 +59,7 @@ export default function SavedPage() {
       </Grid>
       <Divider />
       <br />
-      <Grid container>{posts ? <Posts posts={posts} /> : <center><h3>Asnjë postim nuk u gjend.</h3></center>}</Grid>
+      <Grid container>{posts ? <Posts posts={posts} showDelete /> : <center><h3>Asnjë postim nuk u gjend.</h3></center>}</Grid>
     </div>
   );
 }
