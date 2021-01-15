@@ -70,6 +70,7 @@ export default function SearchPage() {
               shrink: true,
             }}
             onChange={handleChange}
+            autoComplete="off"
           />
         </Grid>
       </Grid>

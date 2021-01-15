@@ -60,6 +60,7 @@ export default function SavedPage() {
               shrink: true,
             }}
             onChange={handleChange}
+            autoComplete="off"
           />
         </Grid>
       </Grid>
