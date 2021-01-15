@@ -61,5 +61,5 @@ export default function Skeletons({showFeaturedSkeleton}) {
 }
 
 Skeletons.protoTypes = {
-  showFeaturedSkeleton: PropTypes.boolean
+  showFeaturedSkeleton: PropTypes.bool
 }
