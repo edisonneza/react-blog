@@ -43,25 +43,31 @@ export default class SiteService {
   }
 
   getCategories() {
-    // var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    // return fetch(proxyUrl + 'https://techalb.al/wp-json/wp/v2/' + '/categories')
-    return fetch(this.baseUrl + "/categories")
-      .then((resp) => resp.json())
-      .then((data) => {
-        SaveValue('categories', data);
-        return data;
-      })
-      .catch((err) => err);
+    if (!navigator.onLine)
+      return new Promise((resolve, reject) => resolve(GetValue("categories")));
+    else {
+      return fetch(this.baseUrl + "/categories")
+        .then((resp) => resp.json())
+        .then((data) => {
+          SaveValue("categories", data);
+          return data;
+        })
+        .catch((err) => err);
+    }
   }
 
-  getHashTags() {
-    return fetch(this.baseUrl + "/tags")
-      .then((resp) => resp.json())
-      .then((data) => {
-        SaveValue('tags', data);
-        return data;
-      })
-      .catch((err) => err);
+  getTags() {
+    if (!navigator.onLine)
+      return new Promise((resolve, reject) => resolve(GetValue("tags")));
+    else {
+      return fetch(this.baseUrl + "/tags")
+        .then((resp) => resp.json())
+        .then((data) => {
+          SaveValue("tags", data);
+          return data;
+        })
+        .catch((err) => err);
+    }
   }
 
   getPostByHref(href) {

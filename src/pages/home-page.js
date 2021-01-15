@@ -42,7 +42,7 @@ export default function HomePage() {
   useEffect(() => {
     if (!categories)
       service.getCategories().then((data) => handleCategories(data));
-    if (!tags) service.getHashTags().then((data) => handleTags(data));
+    if (!tags) service.getTags().then((data) => handleTags(data));
     if (!posts || (tabSelectedPrev && tabSelectedPrev != tabSelected)) {
       setIsLoading(true);
       let searchVal = tabSelected.index > 0 ? tabSelected.value : "";
