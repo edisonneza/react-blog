@@ -10,7 +10,6 @@ export function GetValue(name) {
 
 export function SavePost(post){
   let savedPost = GetValue('savedPost');
-  debugger;
   if(savedPost){
     const postExist = savedPost.filter(item => item.originalLink === post.originalLink).length > 0;
     if(!postExist)

@@ -35,6 +35,10 @@ export default function SavedPage() {
     setSearchVal(ev.target.value);
   };
 
+  const handleDelete = (post) => {
+    setPosts(GetValue('savedPost'));
+  }
+
   return (
     <div className={classes.root}>
       {/* <h4>Kërko</h4> */}
@@ -59,7 +63,7 @@ export default function SavedPage() {
       </Grid>
       <Divider />
       <br />
-      <Grid container>{posts ? <Posts posts={posts} showDelete /> : <center><h3>Asnjë postim nuk u gjend.</h3></center>}</Grid>
+      <Grid container>{posts && posts.length ? <Posts posts={posts} showDelete handleDelete={handleDelete} /> : <center><h3>Asnjë postim nuk u gjend.</h3></center>}</Grid>
     </div>
   );
 }

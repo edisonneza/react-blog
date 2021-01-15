@@ -16,6 +16,7 @@ import { useHistory } from "react-router-dom";
 import { DateFromNow } from "../../utils/functions";
 import GlobalContext from "../../context/global-context";
 import { Delete } from "@material-ui/icons";
+import { GetValue, SaveValue } from "../../services/storageService";
 
 const useStyles = makeStyles({
   card: {
@@ -35,8 +36,17 @@ const useStyles = makeStyles({
 export default function SinglePost(props) {
   const classes = useStyles();
   const history = useHistory();
-  const { post, showDelete } = props;
+  const { post, showDelete, handleDelete } = props;
   const { handlePost } = useContext(GlobalContext);
+
+  const handleDeletePost = () => {
+    const posts = GetValue('savedPost');
+    if(posts){
+      const otherPosts = posts.filter(item => item.originalLink != post.originalLink);
+      SaveValue('savedPost', otherPosts);
+      handleDelete(post); //to refresh the post list in parent component
+    }
+  }
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -124,6 +134,7 @@ export default function SinglePost(props) {
                   aria-label="Fshi postimin"
                   component="span"
                   size="small"
+                  onClick={handleDeletePost}
                 >
                   <Delete />
                 </IconButton>
@@ -139,4 +150,5 @@ export default function SinglePost(props) {
 SinglePost.propTypes = {
   post: PropTypes.object,
   showDelete: PropTypes.bool,
+  handleDelete: PropTypes.func
 };
