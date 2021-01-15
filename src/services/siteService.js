@@ -1,3 +1,5 @@
+import { SaveValue, GetValue } from "./storageService";
+
 export default class SiteService {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
@@ -5,25 +7,39 @@ export default class SiteService {
   }
 
   getPosts(searchQuery) {
-    return fetch(`${this.baseUrl}/posts?_embed=wp:featuredmedia&per_page=10&search=${searchQuery}`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        const post = data.map((data) => {
-          // console.log(data)
-          return {
-            title: data.title.rendered,
-            date: data.date,
-            shortDesc: data.excerpt.rendered,
-            description: data.content.rendered,
-            image: data._embedded['wp:featuredmedia']['0'].source_url,// "https://source.unsplash.com/random",
-            imageText: "Image Text",
-            link: "/post",
-            originalLink: data.link
-          };
-        });
-        return post;
-      })
-      .catch((err) => err);
+    if (!navigator.onLine) {
+      return new Promise((resolve, reject) => {
+        if (GetValue("posts")) resolve(GetValue("posts"));
+        else
+          reject({
+            errorMessage:
+              "Momentalisht nuk keni lidhje interneti dhe nuk keni shikuar asnje post deri tani. Provoni perseri pasi te jeni ne linje.",
+          });
+      });
+    } else {
+      return fetch(
+        `${this.baseUrl}/posts?_embed=wp:featuredmedia&per_page=10&search=${searchQuery}`
+      )
+        .then((resp) => resp.json())
+        .then((data) => {
+          const posts = data.map((data) => {
+            // console.log(data)
+            return {
+              title: data.title.rendered,
+              date: data.date,
+              shortDesc: data.excerpt.rendered,
+              description: data.content.rendered,
+              image: data._embedded["wp:featuredmedia"]["0"].source_url, // "https://source.unsplash.com/random",
+              imageText: "Image Text",
+              link: "/post",
+              originalLink: data.link,
+            };
+          });
+          SaveValue("posts", posts);
+          return posts;
+        })
+        .catch((err) => err);
+    }
   }
 
   getCategories() {
@@ -31,14 +47,20 @@ export default class SiteService {
     // return fetch(proxyUrl + 'https://techalb.al/wp-json/wp/v2/' + '/categories')
     return fetch(this.baseUrl + "/categories")
       .then((resp) => resp.json())
-      .then((data) => data)
+      .then((data) => {
+        SaveValue('categories', data);
+        return data;
+      })
       .catch((err) => err);
   }
 
   getHashTags() {
     return fetch(this.baseUrl + "/tags")
       .then((resp) => resp.json())
-      .then((data) => data)
+      .then((data) => {
+        SaveValue('tags', data);
+        return data;
+      })
       .catch((err) => err);
   }
 
@@ -50,7 +72,7 @@ export default class SiteService {
           title: data.title.rendered,
           date: data.date,
           description: data.content.rendered,
-            image: data._embedded['wp:featuredmedia']['0'].source_url,// "https://source.unsplash.com/random",
+          image: data._embedded["wp:featuredmedia"]["0"].source_url, // "https://source.unsplash.com/random",
           imageText: "Image Text",
           link: "/post",
         };

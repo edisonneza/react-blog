@@ -5,14 +5,21 @@ import FeaturedPost from "../components/featured-post-component";
 import Posts from "../components/home/posts-component";
 import SiteService from "../services/siteService";
 import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, IconButton, useTheme } from "@material-ui/core";
 import Skeletons from "../components/skeletons-component";
 import GlobalContext from "../context/global-context";
 import { usePrevious } from "../customHooks/custom-hooks";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
+import SnackbarNoInternet from "../components/snackbar-no-internet-component";
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme) => ({
   root: {},
-});
+  close: {
+    padding: theme.spacing(0.5),
+  },
+}));
 
 const service = new SiteService();
 
@@ -29,6 +36,7 @@ export default function HomePage() {
   } = useContext(GlobalContext);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [errors, setErrors] = useState("");
 
   const tabSelectedPrev = usePrevious(tabSelected);
   useEffect(() => {
@@ -38,13 +46,16 @@ export default function HomePage() {
     if (!posts || (tabSelectedPrev && tabSelectedPrev != tabSelected)) {
       setIsLoading(true);
       let searchVal = tabSelected.index > 0 ? tabSelected.value : "";
-      service.getPosts(searchVal).then((data) => {
-        handlePosts(data)
-        setIsLoading(false);
-      });
-    } else
-      setIsLoading(false);
-      
+      service
+        .getPosts(searchVal)
+        .then((data) => {
+          handlePosts(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setErrors(error.errorMessage);
+        });
+    } else setIsLoading(false);
   }, [tabSelected.index]);
 
   const sections = [
@@ -66,14 +77,33 @@ export default function HomePage() {
       {/* <h4>Faqja kryesore</h4> */}
       <SectionsHeader sections={sections} title="test" />
       <main>
-        {!isLoading ? (
+        <SnackbarNoInternet />
+        {!isLoading && posts.length > 0 ? (
           <>
             <FeaturedPost post={posts[0]} />
             <Posts posts={posts.filter((item, index) => index != 0)} />{" "}
             {/* get all but not first item (because is used in FeaturedPost) */}
           </>
         ) : (
-          <Skeletons />
+          <>
+            <Snackbar
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              open={!!errors}
+              message={errors}
+              key={"topcenter"}
+              action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    className={classes.close}
+                    onClick={() => setErrors('')}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+              }
+            />
+            <Skeletons />
+          </>
         )}
         {/* <FullScreenPostDialog /> */}
       </main>
