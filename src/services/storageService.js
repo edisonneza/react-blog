@@ -1,9 +1,11 @@
+import Constants from '../constants/constants';
+
 export function SaveValue(name, values) {
-  localStorage.setItem(name, values);
+  localStorage.setItem(Constants.localStoragePrefix + name, JSON.stringify(values));
 }
 
 export function GetValue(name) {
-  return JSON.parse(localStorage.getItem(name));
+  return JSON.parse(localStorage.getItem(Constants.localStoragePrefix + name));
 }
 
 // export function GetValues() {
@@ -19,6 +21,6 @@ export function GetValue(name) {
 //   return items;
 // }
 
-export function DeleteValue(key) {
-  localStorage.removeItem(key);
+export function DeleteValue(name) {
+  localStorage.removeItem(Constants.localStoragePrefix + name);
 }

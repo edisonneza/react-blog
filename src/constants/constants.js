@@ -1,3 +1,4 @@
 export default {
-    appName: 'Tech News'
+    appName: 'Tech News',
+    localStoragePrefix: 'tech_new_app_'
 }
