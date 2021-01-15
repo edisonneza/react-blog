@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -8,15 +8,21 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-import { useHistory } from "react-router-dom";
 import { DateFromNow } from "../../utils/functions";
 import GlobalContext from "../../context/global-context";
 import { Delete } from "@material-ui/icons";
 import { GetValue, SaveValue } from "../../services/storageService";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   card: {
@@ -35,9 +41,9 @@ const useStyles = makeStyles({
 
 export default function SinglePost(props) {
   const classes = useStyles();
-  const history = useHistory();
   const { post, showDelete, handleDelete } = props;
   const { handlePost } = useContext(GlobalContext);
+  const [openDialog, setOpenDialog ] = useState(false);
 
   const handleDeletePost = () => {
     const posts = GetValue('savedPost');
@@ -49,6 +55,7 @@ export default function SinglePost(props) {
   }
 
   return (
+    <>
     <Grid item xs={12} sm={6} md={4}>
       <Card>
         <CardActionArea>
@@ -134,7 +141,7 @@ export default function SinglePost(props) {
                   aria-label="Fshi postimin"
                   component="span"
                   size="small"
-                  onClick={handleDeletePost}
+                  onClick={() => setOpenDialog(true)}
                 >
                   <Delete />
                 </IconButton>
@@ -144,6 +151,23 @@ export default function SinglePost(props) {
         </CardActions>
       </Card>
     </Grid>
+
+    <Dialog
+        open={openDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Jeni të sigurtë për fshirjen e këtij postimi?"}</DialogTitle>
+        <DialogActions>
+          <Button color="primary" onClick={() => setOpenDialog(false)}>
+            Jo
+          </Button>
+          <Button onClick={handleDeletePost} color="primary" autoFocus>
+            Po
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </>
   );
 }
 

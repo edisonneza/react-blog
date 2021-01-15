@@ -19,13 +19,15 @@ export default function SavedPage() {
   const [posts, setPosts] = useState();
 
   useEffect(() => {
-    if(searchVal.length > 2){
+    if (searchVal.length > 2) {
       const posts = GetValue("savedPost");
-      if(posts){
-        const postsFound = posts.filter(item => item.title.toLowerCase().indexOf(searchVal.toLowerCase()) > -1);
+      if (posts) {
+        const postsFound = posts.filter(
+          (item) =>
+            item.title.toLowerCase().indexOf(searchVal.toLowerCase()) > -1
+        );
         setPosts(postsFound);
       }
-
     } else {
       setPosts(GetValue("savedPost"));
     }
@@ -36,8 +38,8 @@ export default function SavedPage() {
   };
 
   const handleDelete = (post) => {
-    setPosts(GetValue('savedPost'));
-  }
+    setPosts(GetValue("savedPost"));
+  };
 
   return (
     <div className={classes.root}>
@@ -63,7 +65,15 @@ export default function SavedPage() {
       </Grid>
       <Divider />
       <br />
-      <Grid container>{posts && posts.length ? <Posts posts={posts} showDelete handleDelete={handleDelete} /> : <center><h3>Asnjë postim nuk u gjend.</h3></center>}</Grid>
+      <Grid container>
+        {posts && posts.length ? (
+          <Posts posts={posts} showDelete handleDelete={handleDelete} />
+        ) : (
+          <h3 style={{width: "100%", textAlign: "center"}}>
+            Asnjë postim nuk u gjend.
+          </h3>
+        )}
+      </Grid>
     </div>
   );
 }
