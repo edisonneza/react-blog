@@ -40,7 +40,7 @@ export default function SettingsForm() {
             <Grid item>
               <FormControlLabel
                 control={<p></p>}
-                label="Dark theme"
+                label="Modaliteti errësirë (Dark Mode)"
                 labelPlacement="start"
               />
             </Grid>

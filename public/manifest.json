@@ -18,8 +18,25 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/pwa",
+  "start_url": "/pwa/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#3367D6",
+  "background_color": "#ffffff",
+  "scope": "/pwa/",
+  "shortcuts": [
+    {
+      "name": "Kërko lajme",
+      "short_name": "Kërko",
+      "description": "Hyni ne pamjen e kerkimit te informacioneve",
+      "url": "/pwa/search",
+      "icons": [{ "src": "/pwa/logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Shiko postimet e ruajtura",
+      "short_name": "Të ruajtura",
+      "description": "Shiko postimet qe keni ruajtur gjate leximit",
+      "url": "/pwa/saved",
+      "icons": [{ "src": "/pwa/logo192.png", "sizes": "192x192" }]
+    }
+  ]
 }
