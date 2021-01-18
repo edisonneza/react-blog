@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
 import Divider from "@material-ui/core/Divider";
 import CloseIcon from "@material-ui/icons/Close";
-import Slide from "@material-ui/core/Slide";
+import { Slide } from "@material-ui/core";
 import FeaturedPost from "./post-component";
 import { Container, Fab } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
