@@ -25,3 +25,7 @@ export async function ShareAPI(title, text, url){
         console.log('Error sharing: ' + error);
       }
 }
+
+export function isMobile(){
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}

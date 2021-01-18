@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -13,14 +13,16 @@ import FavoritesPage from "./pages/favorites-page";
 import GlobalState from "./context/GlobalState";
 import { Container, Box } from "@material-ui/core";
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { isMobile } from "./utils/functions";
 
 function App() {
+  
   return (
     <GlobalState>
       <CssBaseline />
       <Router basename={process.env.PUBLIC_URL}>
         <div className="App">
-          <AppHeader />
+          <AppHeader/>         
 
           <Container>
             <Box>
@@ -50,7 +52,7 @@ function App() {
           <br/>
           <br/>
           <br/>
-          <LabelBottomNavigation />
+          {isMobile() && <LabelBottomNavigation />}
         </div>
       </Router>
     </GlobalState>
