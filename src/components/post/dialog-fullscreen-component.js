@@ -87,7 +87,7 @@ export default function FullScreenPostDialog(props) {
             aria-label="ruaj"
             component="span"
             onClick={handleSavePost}
-            size="large"
+            // size="large"
           >
             <FavoriteBorderIcon fontSize="large"/>
           </IconButton>
@@ -95,7 +95,7 @@ export default function FullScreenPostDialog(props) {
             className={classes.buttons}
             aria-label="Share"
             component="span"
-            size="large"
+            // size="large"
           >
             <ShareIcon fontSize="large"/>
           </IconButton>

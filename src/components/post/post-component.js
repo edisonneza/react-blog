@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 5,
   },
   buttons: {
-    marginRight: 8,
+    marginRight: 15,
   },
 }));
 
@@ -76,7 +76,7 @@ export default function FeaturedPost(props) {
           >
             Linku origjinal
           </Button>
-          <IconButton
+          {/* <IconButton
             className={classes.buttons}
             aria-label="Facebook"
             component="span"
@@ -90,8 +90,8 @@ export default function FeaturedPost(props) {
             component="span"
             size="small"
           >
-            <WhatsAppIcon />
-          </IconButton>
+            <WhatsAppIcon /> 
+          </IconButton> */}
             <i style={{fontSize: 12}}>{ToDateTime(post.date)}</i>
         </Typography>
         <Divider />

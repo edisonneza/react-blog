@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     textAlign: 'center'
   },
+  // appBar: {
+  //   backgroundColor: theme.palette.grey[800]
+  // }
 }));
 
 export default function AppHeader() {

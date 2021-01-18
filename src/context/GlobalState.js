@@ -62,6 +62,9 @@ export default function GlobalState({ children }) {
       secondary: {
         main: mainSecondaryColor,
       },
+      // grey: {
+      //   "800": globalState.darkTheme ? "#35363A" : "#ffffff" 
+      // }
     },
   };
   const theme = createMuiTheme(Theme);
