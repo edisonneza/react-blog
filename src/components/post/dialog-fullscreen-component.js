@@ -1,13 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
 import Divider from "@material-ui/core/Divider";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import FeaturedPost from "./post-component";
 import { Container, Fab } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { SavePost } from "../../services/storageService";
 // import { useHistory } from 'react-router-dom';
 
@@ -80,16 +80,16 @@ export default function FullScreenPostDialog(props) {
         <Container>
           {props.post && <FeaturedPost post={props.post} />}
           <Divider />
-          <br />
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            startIcon={<SaveIcon />}
+
+          <IconButton
+            className={classes.buttons}
+            aria-label="ruaj"
+            component="span"
             onClick={handleSavePost}
+            size="large"
           >
-            Ruaj postimin
-          </Button>
+            <FavoriteBorderIcon fontSize="large"/>
+          </IconButton>
 
 
 

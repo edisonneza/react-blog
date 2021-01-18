@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    minHeight: 320
   },
   overlay: {
     position: "absolute",
@@ -58,24 +59,6 @@ export default function FeaturedPost(props) {
         className={classes.mainFeaturedPost}
         style={{ backgroundImage: `url(${post.image})` }}
       >
-        <div className={classes.overlay} />
-        <Grid container>
-          <Grid item md={6}>
-            <div className={classes.mainFeaturedPostContent}>
-              <Typography
-                component="h1"
-                variant="h3"
-                color="inherit"
-                gutterBottom
-              >
-                {post.title}
-              </Typography>
-              {/* <Typography variant="h5" color="inherit" paragraph>
-              {post.description.split(" ").splice(0, 10).join(" ")}...
-            </Typography> */}
-            </div>
-          </Grid>
-        </Grid>
       </Paper>
       <Divider />
       <Grid item xs={12} md={9}>
@@ -109,7 +92,7 @@ export default function FeaturedPost(props) {
           >
             <WhatsAppIcon />
           </IconButton>
-            <i>{ToDateTime(post.date)}</i>
+            <i style={{fontSize: 12}}>{ToDateTime(post.date)}</i>
         </Typography>
         <Divider />
         <Typography
