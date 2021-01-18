@@ -10,7 +10,7 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { DateFromNow } from "../../utils/functions";
+import { DateFromNow, ShareAPI } from "../../utils/functions";
 import GlobalContext from "../../context/global-context";
 import { Delete } from "@material-ui/icons";
 import { GetValue, SaveValue } from "../../services/storageService";
@@ -47,6 +47,14 @@ export default function SinglePost(props) {
 
   const handleSavePost = () => {
     SavePost(post);
+  }
+
+  const handleShare = () => {
+    const title = post.title;
+    const text = `Une po lexoj nga webi Tech News. Lexo postimin ne linkun origjinal: ${post.title}`
+    const url = post.originalLink;
+
+    ShareAPI(title, text, url);
   }
 
   return (
@@ -118,6 +126,7 @@ export default function SinglePost(props) {
                 aria-label="Share"
                 component="span"
                 size="small"
+                onClick={handleShare}
               >
                 <ShareIcon />
               </IconButton>

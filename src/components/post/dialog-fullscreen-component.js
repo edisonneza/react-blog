@@ -10,6 +10,7 @@ import { Container, Fab } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import { SavePost } from "../../services/storageService";
+import { ShareAPI } from "../../utils/functions";
 // import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +44,14 @@ export default function FullScreenPostDialog(props) {
 
   const handleSavePost = () => {
     SavePost(props.post);
+  }
+
+  const handleShare = () => {
+    const title = props.post.title;
+    const text = `Une po lexoj nga webi Tech News. Lexo postimin ne linkun origjinal: ${props.post.title}`
+    const url = props.post.originalLink;
+
+    ShareAPI(title, text, url);
   }
 
   let open = !!props.post;
@@ -96,6 +105,7 @@ export default function FullScreenPostDialog(props) {
             aria-label="Share"
             component="span"
             // size="large"
+            onClick={handleShare}
           >
             <ShareIcon fontSize="large"/>
           </IconButton>
