@@ -8,8 +8,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import ShareIcon from '@material-ui/icons/Share';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { DateFromNow } from "../../utils/functions";
 import GlobalContext from "../../context/global-context";
 import { Delete } from "@material-ui/icons";
@@ -20,21 +20,18 @@ import {
   DialogActions,
   DialogTitle,
 } from "@material-ui/core";
+import { SavePost } from '../../services/storageService';
+import { makeStyles } from "@material-ui/core/styles";
 
-// const useStyles = makeStyles({
-//   card: {
-//     display: "flex",
-//   },
-//   cardDetails: {
-//     flex: 1,
-//   },
-//   cardMedia: {
-//     width: 160,
-//   },
-// });
+
+const useStyles = makeStyles({
+  cardContent: {
+    padding: "10px 8px 0 10px",
+  }
+});
 
 export default function SinglePost(props) {
-  // const classes = useStyles();
+  const classes = useStyles();
   const { post, showDelete, handleDelete } = props;
   const { handlePost } = useContext(GlobalContext);
   const [openDialog, setOpenDialog ] = useState(false);
@@ -46,6 +43,10 @@ export default function SinglePost(props) {
       SaveValue('savedPost', otherPosts);
       handleDelete(post); //to refresh the post list in parent component
     }
+  }
+
+  const handleSavePost = () => {
+    SavePost(post);
   }
 
   return (
@@ -82,7 +83,7 @@ export default function SinglePost(props) {
             image={post.image}
             title={post.imageTitle}
           />
-          <CardContent>
+          <CardContent onClick={() => handlePost(post)} className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
               {post.title}
             </Typography>
@@ -95,37 +96,48 @@ export default function SinglePost(props) {
                   post.shortDesc.split(" ").splice(0, 20).join(" ") + "...",
               }}
             ></Typography>
-            <i>{DateFromNow(post.date)}</i>
           </CardContent>
         </CardActionArea>
         <CardActions>
           <Grid container justify="space-between">
             <Grid item>
+              <i style={{marginRight: 20}}>{DateFromNow(post.date)}</i>
+
               <IconButton
                 color="primary"
-                aria-label="Facebook"
+                aria-label="Ruaj"
+                component="span"
+                onClick={handleSavePost}
+                size="small"
+                style={{marginRight: 10}}
+              >
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton
+                color="primary"
+                aria-label="Share"
                 component="span"
                 size="small"
               >
-                <FacebookIcon />
+                <ShareIcon />
               </IconButton>
-              <IconButton
+              {/* <IconButton
                 color="primary"
                 aria-label="WhatsApp"
                 component="span"
                 size="small"
               >
                 <WhatsAppIcon />
-              </IconButton>
+              </IconButton> */}
 
-              <Button
+              {/* <Button
                 size="small"
                 color="primary"
                 // onClick={() => history.push({ pathname: post.link, state: { post } })}
                 onClick={() => handlePost(post)}
               >
                 Vazhdo leximin...
-              </Button>
+              </Button> */}
             </Grid>
 
             {showDelete && (

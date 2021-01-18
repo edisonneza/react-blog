@@ -8,6 +8,7 @@ import Slide from "@material-ui/core/Slide";
 import FeaturedPost from "./post-component";
 import { Container, Fab } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import ShareIcon from "@material-ui/icons/Share";
 import { SavePost } from "../../services/storageService";
 // import { useHistory } from 'react-router-dom';
 
@@ -90,7 +91,14 @@ export default function FullScreenPostDialog(props) {
           >
             <FavoriteBorderIcon fontSize="large"/>
           </IconButton>
-
+          <IconButton
+            className={classes.buttons}
+            aria-label="Share"
+            component="span"
+            size="large"
+          >
+            <ShareIcon fontSize="large"/>
+          </IconButton>
 
 
           <Divider />
@@ -100,7 +108,7 @@ export default function FullScreenPostDialog(props) {
             className={classes.fab}
             color="primary"
             onClick={handleClose}
-            size="small"
+            // size="small"
           >
             <CloseIcon />
           </Fab>
