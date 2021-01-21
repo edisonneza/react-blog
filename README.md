@@ -17,7 +17,6 @@ To generate build files (by removing the source map files)
 * npm run winBuild
 <br/>
 or <i>(if LINUX)</i>
-<br/>
 * npm run build
 
 See GIFs below on desktop and mobile devices:
