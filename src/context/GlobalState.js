@@ -6,7 +6,7 @@ import {
   deepPurple,
   deepOrange,
 } from "@material-ui/core/colors";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider, unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core/styles";
 import { SaveValue, GetValue } from "../services/storageService";
 import Constants from '../constants/constants';
 import FullScreenPostDialog from "../components/post/dialog-fullscreen-component";
