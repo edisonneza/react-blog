@@ -1,8 +1,10 @@
 # PWA Blog template using ReactJs and Material UI
 
-This is a template PWA - Progresive Web Application that uses ReactJs and Material UI. Currently I've done the development in a subfolder ('/pwa/'). To run in the root folder just remove the ("homepage": "/pwa/",) in the package.json file. (Also remove the "set HOST=intranet&& " from scripts->start property in package.json)
+This is a template PWA - Progresive Web Application that uses ReactJs and Material UI. <br/>
+Currently I've done the development in a subfolder ('/pwa/'). To run in the root folder just remove the ("homepage": "/pwa/",) in the package.json file. (Also remove the "set HOST=intranet&& " from scripts->start property in package.json)
 
-Store is managed using React's Context API.
+Store is managed using React's Context API. <br/>
+<i>(Posts are being retrieved from a wordpress site using the WordPress REST API)</i>
 
 Steps to install and start playing with the project:
 
@@ -12,7 +14,11 @@ Steps to install and start playing with the project:
 
 To generate build files (by removing the source map files) 
 
-1. npm run winBuild
+* npm run winBuild
+<br/>
+or <i>(if LINUX)</i>
+<br/>
+* npm run build
 
 See GIFs below on desktop and mobile devices:
 
