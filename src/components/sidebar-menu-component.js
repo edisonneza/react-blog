@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     minHeight: "44px !important",
   },
 }));
@@ -120,6 +120,7 @@ export default function SideBarMenu({ open, handleOpen }) {
         }}
       >
         <div className={classes.drawerHeader}>
+          <span style={{ margin: "0 auto" }}>{Constants.appName}</span>
           <IconButton onClick={handleOpen}>
             <ChevronLeftIcon />
           </IconButton>
