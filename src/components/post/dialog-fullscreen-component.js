@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
@@ -11,6 +11,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import { SavePost } from "../../services/storageService";
 import { ShareAPI } from "../../utils/functions";
+import SnackbarNotify from '../snackbar-notify-component';
 // import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function FullScreenPostDialog(props) {
   const classes = useStyles();
+  const [openSnackbarNotify, setOpenSnackbarNotify] = useState(false);
 
   const handleClose = () => {
     props.handlePost(null);
@@ -44,6 +46,10 @@ export default function FullScreenPostDialog(props) {
 
   const handleSavePost = () => {
     SavePost(props.post);
+    setOpenSnackbarNotify(true);
+    setTimeout(() => {
+      setOpenSnackbarNotify(false);
+    }, 2000);
   }
 
   const handleShare = () => {
@@ -58,6 +64,9 @@ export default function FullScreenPostDialog(props) {
 
   return (
     <div>
+      {openSnackbarNotify && (
+        <SnackbarNotify message="Posti u ruaj me sukses!" />
+      )}
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Open full-screen dialog
       </Button> */}

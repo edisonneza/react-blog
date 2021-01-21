@@ -17,6 +17,7 @@ import { GetValue, SaveValue } from "../../services/storageService";
 import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
 import { SavePost } from "../../services/storageService";
 import { makeStyles } from "@material-ui/core/styles";
+import SnackbarNotify from "../snackbar-notify-component";
 
 const useStyles = makeStyles({
   cardContent: {
@@ -29,6 +30,7 @@ export default function SinglePost(props) {
   const { post, showDelete, handleDelete } = props;
   const { handlePost } = useContext(GlobalContext);
   const [openDialog, setOpenDialog] = useState(false);
+  const [openSnackbarNotify, setOpenSnackbarNotify] = useState(false);
 
   const handleDeletePost = () => {
     const posts = GetValue("savedPost");
@@ -43,6 +45,7 @@ export default function SinglePost(props) {
 
   const handleSavePost = () => {
     SavePost(post);
+    setOpenSnackbarNotify(true);
   };
 
   const handleShare = () => {
@@ -55,6 +58,9 @@ export default function SinglePost(props) {
 
   return (
     <>
+      {openSnackbarNotify && (
+        <SnackbarNotify message="Posti u ruaj me sukses!" />
+      )}
       <Grid item xs={12} sm={6} md={4}>
         <Card>
           <CardActionArea>
@@ -157,7 +163,7 @@ export default function SinglePost(props) {
                     component="span"
                     size="small"
                     onClick={() => setOpenDialog(true)}
-                    style={{marginLeft: 10}}
+                    style={{ marginLeft: 10 }}
                   >
                     <Delete />
                   </IconButton>
