@@ -8,62 +8,58 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from "@material-ui/icons/Share";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import { DateFromNow, ShareAPI } from "../../utils/functions";
 import GlobalContext from "../../context/global-context";
 import { Delete } from "@material-ui/icons";
 import { GetValue, SaveValue } from "../../services/storageService";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogTitle,
-} from "@material-ui/core";
-import { SavePost } from '../../services/storageService';
+import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
+import { SavePost } from "../../services/storageService";
 import { makeStyles } from "@material-ui/core/styles";
-
 
 const useStyles = makeStyles({
   cardContent: {
     padding: "10px 8px 0 10px",
-  }
+  },
 });
 
 export default function SinglePost(props) {
   const classes = useStyles();
   const { post, showDelete, handleDelete } = props;
   const { handlePost } = useContext(GlobalContext);
-  const [openDialog, setOpenDialog ] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleDeletePost = () => {
-    const posts = GetValue('savedPost');
-    if(posts){
-      const otherPosts = posts.filter(item => item.originalLink !== post.originalLink);
-      SaveValue('savedPost', otherPosts);
+    const posts = GetValue("savedPost");
+    if (posts) {
+      const otherPosts = posts.filter(
+        (item) => item.originalLink !== post.originalLink
+      );
+      SaveValue("savedPost", otherPosts);
       handleDelete(post); //to refresh the post list in parent component
     }
-  }
+  };
 
   const handleSavePost = () => {
     SavePost(post);
-  }
+  };
 
   const handleShare = () => {
     const title = post.title;
-    const text = `Une po lexoj nga webi Tech News. Lexo postimin ne linkun origjinal: ${post.title}`
+    const text = `Une po lexoj nga webi Tech News. Lexo postimin ne linkun origjinal: ${post.title}`;
     const url = post.originalLink;
 
     ShareAPI(title, text, url);
-  }
+  };
 
   return (
     <>
-    <Grid item xs={12} sm={6} md={4}>
-      <Card>
-        <CardActionArea>
-          {/* <CardActionArea component="a" href="#"> */}
-          {/* <Card className={classes.card}>
+      <Grid item xs={12} sm={6} md={4}>
+        <Card>
+          <CardActionArea>
+            {/* <CardActionArea component="a" href="#"> */}
+            {/* <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
@@ -84,53 +80,37 @@ export default function SinglePost(props) {
             <CardMedia className={classes.cardMedia} image={post.image} title={post.imageTitle} />
           </Hidden>
         </Card> */}
-          <CardMedia
-            component="img"
-            alt={post.imageTitle}
-            height="140"
-            image={post.image}
-            title={post.imageTitle}
-          />
-          <CardContent onClick={() => handlePost(post)} className={classes.cardContent}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {post.title}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              dangerouslySetInnerHTML={{
-                __html:
-                  post.shortDesc.split(" ").splice(0, 20).join(" ") + "...",
-              }}
-            ></Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Grid container justify="space-between">
-            <Grid item>
-              <i style={{marginRight: 20}}>{DateFromNow(post.date)}</i>
+            <CardMedia
+              component="img"
+              alt={post.imageTitle}
+              height="140"
+              image={post.image}
+              title={post.imageTitle}
+            />
+            <CardContent
+              onClick={() => handlePost(post)}
+              className={classes.cardContent}
+            >
+              <Typography gutterBottom variant="h5" component="h2">
+                {post.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    post.shortDesc.split(" ").splice(0, 20).join(" ") + "...",
+                }}
+              ></Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Grid container justify="space-between">
+              <Grid item>
+                <i style={{ marginRight: 20 }}>{DateFromNow(post.date)}</i>
 
-              <IconButton
-                color="primary"
-                aria-label="Ruaj"
-                component="span"
-                onClick={handleSavePost}
-                size="small"
-                style={{marginRight: 10}}
-              >
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton
-                color="primary"
-                aria-label="Share"
-                component="span"
-                size="small"
-                onClick={handleShare}
-              >
-                <ShareIcon />
-              </IconButton>
-              {/* <IconButton
+                {/* <IconButton
                 color="primary"
                 aria-label="WhatsApp"
                 component="span"
@@ -139,7 +119,7 @@ export default function SinglePost(props) {
                 <WhatsAppIcon />
               </IconButton> */}
 
-              {/* <Button
+                {/* <Button
                 size="small"
                 color="primary"
                 // onClick={() => history.push({ pathname: post.link, state: { post } })}
@@ -147,32 +127,55 @@ export default function SinglePost(props) {
               >
                 Vazhdo leximin...
               </Button> */}
-            </Grid>
+              </Grid>
 
-            {showDelete && (
               <Grid item>
                 <IconButton
-                  color="secondary"
-                  aria-label="Fshi postimin"
+                  color="primary"
+                  aria-label="Ruaj"
+                  component="span"
+                  onClick={handleSavePost}
+                  size="small"
+                  style={{ marginRight: 10 }}
+                >
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton
+                  color="primary"
+                  aria-label="Share"
                   component="span"
                   size="small"
-                  onClick={() => setOpenDialog(true)}
+                  onClick={handleShare}
                 >
-                  <Delete />
+                  <ShareIcon />
                 </IconButton>
-              </Grid>
-            )}
-          </Grid>
-        </CardActions>
-      </Card>
-    </Grid>
 
-    <Dialog
+                {showDelete && (
+                  <IconButton
+                    color="secondary"
+                    aria-label="Fshi postimin"
+                    component="span"
+                    size="small"
+                    onClick={() => setOpenDialog(true)}
+                    style={{marginLeft: 10}}
+                  >
+                    <Delete />
+                  </IconButton>
+                )}
+              </Grid>
+            </Grid>
+          </CardActions>
+        </Card>
+      </Grid>
+
+      <Dialog
         open={openDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Jeni të sigurtë për fshirjen e këtij postimi?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"Jeni të sigurtë për fshirjen e këtij postimi?"}
+        </DialogTitle>
         <DialogActions>
           <Button color="primary" onClick={() => setOpenDialog(false)}>
             Jo
@@ -182,12 +185,12 @@ export default function SinglePost(props) {
           </Button>
         </DialogActions>
       </Dialog>
-      </>
+    </>
   );
 }
 
 SinglePost.propTypes = {
   post: PropTypes.object,
   showDelete: PropTypes.bool,
-  handleDelete: PropTypes.func
+  handleDelete: PropTypes.func,
 };
