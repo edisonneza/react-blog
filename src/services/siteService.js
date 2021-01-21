@@ -60,14 +60,58 @@ export default class SiteService {
     if (!navigator.onLine)
       return new Promise((resolve, reject) => resolve(GetValue("tags")));
     else {
-      return fetch(this.baseUrl + "/tags")
-        .then((resp) => resp.json())
-        .then((data) => {
-          SaveValue("tags", data);
-          return data;
-        })
-        .catch((err) => err);
+      // return fetch(this.baseUrl + "/tags")
+      //   .then((resp) => resp.json())
+      //   .then((data) => {
+      //     SaveValue("tags", data);
+      //     return data;
+      //   })
+      //   .catch((err) => err);
+      return new Promise((resolve, reject) => {
+        const localStorageTags = GetValue('tags');
+        if(!localStorageTags || !localStorageTags.length){
+          const initialTags = [
+            { value: "Apple", active: false },
+            { value: "Technology", active: false },
+            { value: "Microsoft", active: false },
+            { value: "Android", active: false },
+            { value: "iOS", active: false },
+            { value: "Shkence", active: false },
+            { value: "Samsung", active: false },
+            { value: "iPhone", active: false },
+            { value: "OnePlus", active: false },
+            { value: "Nokia", active: false },
+            { value: "Programming", active: false },
+            { value: "Website", active: false },
+            { value: "Web App", active: false },
+            { value: ".NET 5", active: false },
+            { value: "ASP.NET", active: false },
+            { value: "C#", active: false },
+            { value: "Java", active: false },
+            { value: "Javascript", active: false },
+            { value: "Typescript", active: false },
+            { value: "PHP", active: false },
+            { value: "React", active: false },
+            { value: "Angular", active: false },
+            { value: "Covid", active: false },
+          ];
+          SaveValue('tags', initialTags);
+        }
+
+        return resolve(GetValue('tags'));
+      });
     }
+  }
+
+  saveTags(value) { //to save all
+    return new Promise((resolve, reject) => {
+      const tags = GetValue('tags');
+      const newTags = tags.map((item) => {
+        return item.value !== value ? item : { value, active: !item.active };
+      });
+      SaveValue('tags', newTags);
+      resolve(GetValue('tags'));
+    });
   }
 
   getPostByHref(href) {
