@@ -1,6 +1,7 @@
 # PWA Blog template using ReactJs and Material UI
 
 This is a template PWA - Progresive Web Application that uses ReactJs and Material UI. <br/>
+App works offline by saving responses in localStorage. <br/>
 Currently I've done the development in a subfolder ('/pwa/'). To run in the root folder just remove the ("homepage": "/pwa/",) in the package.json file. (Also remove the "set HOST=intranet&& " from scripts->start property in package.json)
 
 Store is managed using React's Context API. <br/>
