@@ -22,4 +22,7 @@ or <i>(if LINUX)</i>
 
 See GIFs below on desktop and mobile devices:
 
+![desktop version](preview_images/tech_news_en_desktop.gif)
+
+![mobile version](preview_images/tech_news_en_mobile.gif)
 
