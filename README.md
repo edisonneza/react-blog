@@ -9,7 +9,7 @@ Store is managed using React's Context API. <br/>
 
 Steps to install and start playing with the project:
 
-1. git clone https://github.com/edisonneza/react_blog.git
+1. git clone https://github.com/edisonneza/react-blog.git
 2. npm i
 3. npm run start
 
