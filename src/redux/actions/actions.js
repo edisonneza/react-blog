@@ -35,6 +35,6 @@ export function setTabSelected(tabSelected) {
   return { type: SET_TAB_SELECTED, tabSelected };
 }
 
-export function setSearchPosts(posts) {
-  return { type: SET_SEARCH_POSTS, posts };
+export function setSearchPosts(searchPosts) {
+  return { type: SET_SEARCH_POSTS, searchPosts };
 }

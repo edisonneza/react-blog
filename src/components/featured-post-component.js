@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import GlobalContext from '../context/global-context';
+import { useDispatch } from "react-redux";
+import { setPost } from "../redux/actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -37,7 +38,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FeaturedPost(props) {
-  const { handlePost } = useContext(GlobalContext);
+  const dispatch = useDispatch();
+
+  const handlePost = (post) => dispatch(setPost(post));
 
   const classes = useStyles();
   const { post } = props;

@@ -1,11 +1,12 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Grid, Divider, Snackbar, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Skeletons from "../components/skeletons-component";
 import Posts from "../components/home/posts-component";
 import SiteService from "../services/siteService";
-import GlobalContext from "../context/global-context";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchPosts } from "../redux/actions/actions";
 
 const useStyles = makeStyles({
   root: {},
@@ -19,7 +20,8 @@ const service = new SiteService();
 
 export default function SearchPage() {
   const classes = useStyles();
-  const { searchPosts, handleSearchPosts } = useContext(GlobalContext);
+  const searchPosts = useSelector(state => state.searchPosts);
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState("");
@@ -33,14 +35,14 @@ export default function SearchPage() {
         service
           .getPosts(searchVal, 15)
           .then((data) => {
-            handleSearchPosts({ searchValue: searchVal, posts: data });
+            dispatch(setSearchPosts({ searchValue: searchVal, posts: data }));
             setIsLoading(false);
           })
           .catch((error) => {
             setErrors(error.errorMessage);
           });
       } else {
-        handleSearchPosts({ searchValue: "", posts: [] });
+            dispatch(setSearchPosts({ searchValue: "", posts: [] }));
       }
     }, 1000);
 

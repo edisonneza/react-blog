@@ -9,7 +9,7 @@ export function usePrevious(value) {
 }
 
 // use async operation with automatic abortion on unmount
-function useAsync(asyncFn, onSuccess) {
+export function useAsync(asyncFn, onSuccess) {
   React.useEffect(() => {
     let isMounted = true;
     asyncFn().then(data => {

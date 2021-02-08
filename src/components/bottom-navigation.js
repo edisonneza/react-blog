@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -8,8 +8,9 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookmarksIcon from "@material-ui/icons/Bookmarks";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { useHistory } from "react-router-dom";
-import GlobalContext from "../context/global-context";
 import Constants from "../constants/constants";
+import { useDispatch } from "react-redux";
+import { setTitle } from "../redux/actions/actions";
 
 const useStyles = makeStyles({
   root: {
@@ -25,9 +26,11 @@ export default function LabelBottomNavigation() {
   const classes = useStyles();
   let history = useHistory();
   const [value, setValue] = React.useState(history.location.pathname);
-  const { handleTitle } = useContext(GlobalContext);
 
-  const setTitle = (value) => {
+  const dispatch = useDispatch();
+  const handleTitle = (title) => dispatch(setTitle(title));
+
+  const setTitleByRoute = (value) => {
     switch (value) {
       case "/":
         handleTitle(Constants.appName);
@@ -51,13 +54,12 @@ export default function LabelBottomNavigation() {
   };
 
   useEffect(() => {
-    setTitle(value);
-
+    setTitleByRoute(value);
   }, [value]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    setTitle(newValue);
+    setTitleByRoute(newValue);
     history.push(newValue);
   };
 

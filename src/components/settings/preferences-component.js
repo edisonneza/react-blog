@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import GlobalContext from "../../context/global-context";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setDarkTheme } from "../../redux/actions/actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -18,10 +18,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SettingsForm() {
   const classes = useStyles();
-  const { darkTheme, handleDarkTheme } = useContext(GlobalContext);
+  const darkTheme = useSelector((state) => state.darkTheme);
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    if (event.target.name === "darkTheme") handleDarkTheme(event.target.checked);
+    if (event.target.name === "darkTheme")
+      dispatch(setDarkTheme(event.target.checked));
     // setState({ ...state, [event.target.name]: event.target.checked });
   };
 
@@ -50,10 +52,8 @@ export default function SettingsForm() {
                 labelPlacement="start"
               />
             </Grid>
-          </Grid> {/*end container*/}
-
-
-
+          </Grid>{" "}
+          {/*end container*/}
         </Grid>
       </Grid>
     </form>

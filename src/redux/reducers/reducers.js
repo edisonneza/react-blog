@@ -9,7 +9,7 @@ import {
   SET_TAB_SELECTED,
 } from "../actions/actions";
 import Constants from "../../constants/constants";
-import { GetValue } from "../../services/storageService";
+import { GetValue, SaveValue } from "../../services/storageService";
 
 const initialState = {
   title: Constants.appName,
@@ -33,6 +33,7 @@ function rootReducer(state = initialState, action) {
         title: action.title,
       };
     case SET_DARK_THEME:
+      SaveValue("darkTheme", action.darkTheme);
       return {
         ...state,
         darkTheme: action.darkTheme,
@@ -63,17 +64,17 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         searchPosts: {
-            searchValue: action.searchPosts.searchValue,
-            posts: action.searchPosts.posts
+          searchValue: action.searchPosts.searchValue,
+          posts: action.searchPosts.posts,
         },
       };
 
-      case SET_TAB_SELECTED:
+    case SET_TAB_SELECTED:
       return {
         ...state,
         tabSelected: {
-            index: action.tabSelected.index,
-            value: action.tabSelected.value
+          index: action.tabSelected.index,
+          value: action.tabSelected.value,
         },
       };
     default:
