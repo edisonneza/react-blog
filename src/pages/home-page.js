@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SectionsHeader from "../components/home/sections-component";
 import FeaturedPost from "../components/featured-post-component";
@@ -6,12 +6,12 @@ import Posts from "../components/home/posts-component";
 import SiteService from "../services/siteService";
 import { IconButton } from "@material-ui/core";
 import Skeletons from "../components/skeletons-component";
-import GlobalContext from "../context/global-context";
 import { usePrevious } from "../customHooks/custom-hooks";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import SnackbarNoInternet from "../components/snackbar-no-internet-component";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setPosts } from "../redux/actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -24,15 +24,9 @@ const service = new SiteService();
 
 export default function HomePage() {
   const classes = useStyles();
-  const {
-    posts,
-    handlePosts,
-    // categories,
-    // handleCategories,
-    // tags,
-    // handleTags,
-    tabSelected,
-  } = useContext(GlobalContext);
+  const posts = useSelector((state) => state.posts);
+  const tabSelected = useSelector((state) => state.tabSelected);
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState("");
@@ -48,7 +42,7 @@ export default function HomePage() {
       service
         .getPosts(searchVal)
         .then((data) => {
-          handlePosts(data);
+          dispatch(setPosts(data));
           setIsLoading(false);
         })
         .catch((error) => {
@@ -91,14 +85,14 @@ export default function HomePage() {
               message={errors}
               key={"topcenter"}
               action={
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    className={classes.close}
-                    onClick={() => setErrors('')}
-                  >
-                    <CloseIcon />
-                  </IconButton>
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  className={classes.close}
+                  onClick={() => setErrors("")}
+                >
+                  <CloseIcon />
+                </IconButton>
               }
             />
             <Skeletons showFeaturedSkeleton />

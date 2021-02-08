@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -11,13 +11,14 @@ import IconButton from "@material-ui/core/IconButton";
 import ShareIcon from "@material-ui/icons/Share";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { DateFromNow, ShareAPI } from "../../utils/functions";
-import GlobalContext from "../../context/global-context";
 import { Delete } from "@material-ui/icons";
 import { GetValue, SaveValue } from "../../services/storageService";
 import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
 import { SavePost } from "../../services/storageService";
 import { makeStyles } from "@material-ui/core/styles";
 import SnackbarNotify from "../snackbar-notify-component";
+import { useDispatch } from "react-redux";
+import { setPost } from "../../redux/actions/actions";
 
 const useStyles = makeStyles({
   cardContent: {
@@ -28,10 +29,11 @@ const useStyles = makeStyles({
 export default function SinglePost(props) {
   const classes = useStyles();
   const { post, showDelete, handleDelete } = props;
-  const { handlePost } = useContext(GlobalContext);
   const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbarNotify, setOpenSnackbarNotify] = useState(false);
-
+  const dispatch = useDispatch();
+  const handlePost = (post) => dispatch(setPost(post));
+  
   const handleDeletePost = () => {
     const posts = GetValue("savedPost");
     if (posts) {

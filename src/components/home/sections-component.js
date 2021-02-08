@@ -4,7 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import GlobalContext from "../../context/global-context";
+import { useDispatch, useSelector } from "react-redux";
+import { setTabSelected } from "../../redux/actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -38,7 +39,8 @@ function a11yProps(index) {
 
 export default function SectionsHeader(props) {
   const classes = useStyles();
-  const { tabSelected, handleTabSelected } = useContext(GlobalContext);
+  const tabSelected = useSelector(state => state.tabSelected);
+  const dispatch = useDispatch();
 
   const { sections } = props;
   const [value, setValue] = useState({
@@ -47,7 +49,7 @@ export default function SectionsHeader(props) {
   });
 
   const handleTabChange = (event, val) => {
-    handleTabSelected({ index: val, value: event.target.innerText });
+    dispatch(setTabSelected({index: val, value: event.target.innerText}));
     setValue({ id: val, value: event.target.innerText });
   };
 

@@ -15,8 +15,9 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookmarksIcon from "@material-ui/icons/Bookmarks";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { useHistory } from "react-router-dom";
-import GlobalContext from "../context/global-context";
 import Constants from "../constants/constants";
+import { useDispatch } from "react-redux";
+import { setTitle } from "../redux/actions/actions";
 
 const drawerWidth = 240;
 
@@ -67,9 +68,11 @@ export default function SideBarMenu({ open, handleOpen }) {
   //   const theme = useTheme();
   const history = useHistory();
   const [value, setValue] = React.useState(history.location.pathname);
-  const { handleTitle } = useContext(GlobalContext);
+  const dispatch = useDispatch();
 
-  const setTitle = (value) => {
+  const handleTitle = (title) => dispatch(setTitle(title));
+
+  const setTitleByRoute = (value) => {
     switch (value) {
       case "/":
         handleTitle(Constants.appName);
@@ -95,7 +98,7 @@ export default function SideBarMenu({ open, handleOpen }) {
   const handleChange = (newValue) => {
     history.push(newValue);
     setValue(newValue);
-    // setTitle(newValue);
+    // setTitleByRoute(newValue);
   };
 
   const isSelected = (route) => {
@@ -103,7 +106,7 @@ export default function SideBarMenu({ open, handleOpen }) {
   };
 
   useEffect(() => {
-    setTitle(value);
+    setTitleByRoute(value);
   }, [value]);
 
   return (
